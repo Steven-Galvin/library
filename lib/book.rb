@@ -28,4 +28,30 @@ class Book
     result = DB.exec("INSERT INTO books (title, author) VALUES ('#{@title}', '#{@author}') RETURNING id;")
     @id = result.first.fetch('id').to_i
   end
+
+  def self.find (id)
+    found_book = nil
+    Book.all.each do |book|
+      if book.id == id
+        found_book = book
+      end
+    end
+    found_book
+  end
+
+  def update_title (attributes)
+    @title = attributes.fetch(:title)
+    @id = self.id
+    DB.exec("UPDATE books SET title = '#{@title}' WHERE id = #{@id};")
+  end
+
+  def update_author (attributes)
+    @author = attributes.fetch(:author)
+    @id = self.id
+    DB.exec("UPDATE books SET title = '#{@author}' WHERE id = #{@id};")
+  end
+
+  def delete
+    DB.exec("DELETE FROM books WHERE id = #{self.id};")
+  end
 end
