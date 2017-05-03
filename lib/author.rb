@@ -25,4 +25,19 @@ class Author
     result = DB.exec("INSERT INTO authors (name) VALUES ('#{@name}') RETURNING id;")
     @id = result.first.fetch('id').to_i
   end
+
+  def self.find (id)
+    found_author = nil
+    Author.all.each do |author|
+      if author.id == id
+        found_author = author
+      end
+    end
+    found_author
+  end
+
+  def delete
+    DB.exec("DELETE FROM authors WHERE id = #{self.id}")
+  end
+
 end
