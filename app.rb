@@ -35,15 +35,29 @@ end
 
 post '/book/search' do
   book = params.fetch('search')
-
   @books = Book.search_book(book)
   erb(:book_search_results)
 end
 
+get("/books/:id") do
+  @book = Book.find(params.fetch("id").to_i())
+  @authors = Author.all
+  erb(:book_info)
+end
+
 get("/books/search/:id") do
   @book = Book.find(params.fetch("id").to_i())
-
   erb(:book_info)
+end
+
+patch("/books/:id") do
+  book_id = params.fetch('id').to_i
+  @book = Book.find(book_id)
+  author_ids = params.fetch('author_ids')
+  @book.update({:author_ids => author_ids})
+  @authors = Author.all
+  erb(:book_info)
+
 end
 
 post '/authors' do
@@ -56,13 +70,16 @@ end
 
 post '/author/search' do
   author = params.fetch('search')
-
   @authors = Author.search_author(author)
   erb(:author_search_results)
 end
 
-get("/authors/search/:id") do
- @author = Author.find(params.fetch("id").to_i())
+get("/authors/:id") do
+  @author =      Author.find(params.fetch("id").to_i())
+  erb(:author_info)
+end
 
+get("/authors/search/:id") do
+  @author =      Author.find(params.fetch("id").to_i())
   erb(:author_info)
 end

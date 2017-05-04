@@ -1,5 +1,4 @@
-
-<p>Add an author to the database:</p>
+<h4>Add an author to the database:</h4>
 
 <form action="/authors" method="post">
   <label for="name">Author's name:</label>
@@ -7,12 +6,16 @@
 
   <button type="submit">Add author</button>
 </form>
+<hr>
+<h4>Here are all the authors in the database:</h4>
+<% if @authors.any?() %>
+  <p>Click on an author to see information about them and see which books they wrote:</p>
 
-
-
-<form action="/author/search" method="post">
-  <label for="search">Search for an author by name:</label>
-  <input id="search" name="search" type="text" required>
-
-  <button type="submit">Submit</button>
-</form>
+  <ul>
+    <% @authors.each do |author| %>
+      <li><a href="/authors/<%= author.id %>"><%= author.name() %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no authors added yet</p>
+<% end %>

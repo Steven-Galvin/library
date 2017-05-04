@@ -1,5 +1,4 @@
-
-<p>Add a book to the database:</p>
+<h4>Add a book to the database:</h4>
 
 <form action="/books" method="post">
   <label for="title">Book's title:</label>
@@ -7,12 +6,16 @@
 
   <button type="submit">Add book</button>
 </form>
+<hr>
+<h4>Here are all the books in the database:</h4>
+<% if @books.any?() %>
+<p>Click on a book to view author(s) or edit book information:</p>
+<ul>
+  <% @books.each do |book| %>
+  <li><a href="/books/<%= book.id %>"><%= book.title %></a></li>
+  <% end %>
+</ul>
 
-
-
-<form action="/book/search" method="post">
-  <label for="search">Search for a book by title:</label>
-  <input id="search" name="search" type="text" required>
-
-  <button type="submit">Submit</button>
-</form>
+<% else %>
+<p>There are no books added yet</p>
+<% end %>

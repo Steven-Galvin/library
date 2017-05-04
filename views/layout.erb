@@ -13,6 +13,31 @@
       <h1>Library</h1>
     </div></a>
     <hr>
+    <div class="row well">
+      <div class="col-md-6">
+        <form action="/author/search" method="post">
+          <label for="search">Search for an author by name:</label>
+          <input id="search" name="search" type="text" required>
+
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+
+      <div class="col-md-6">
+        <form action="/book/search" method="post">
+          <label for="search">Search for a book by title:</label>
+          <input id="search" name="search" type="text" required>
+
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+    <div class="row well">
+      <ul class="nav nav-tabs">
+        <li role="presentation" data-toggle="tab"><a href="/books">Book List</a></li>
+        <li role="presentation" data-toggle="tab"><a href="/authors">Author List</a></li>
+      </ul>
+    </div>
       <%= yield %>
     </div>
   </body>
