@@ -1,3 +1,29 @@
 
 <p><a href="/books">Add a new book</a></p>
 <p><a href="/authors">Add a new author</a></p>
+
+<!-- <h4>Here are all the books in the database:</h4>
+<% if @books.any?() %>
+<p>Click on a book to see information about it and mark which authors wrote it:</p>
+<ul>
+  <% @books.each do |book| %>
+  <li><a href="/books/<%= book.id %>"><%= book.title %></a></li>
+  <% end %>
+</ul>
+
+<% else %>
+<p>There are no books added yet</p>
+<% end %>
+
+<h4>Here are all the authors in the database:</h4>
+<% if @authors.any?() %>
+  <p>Click on an author to see information about them and see which books they wrote:</p>
+
+  <ul>
+    <% @authors.each do |author| %>
+      <li><a href="/authors/<%= author.id %>"><%= author.name() %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no authors added yet</p>
+<% end %> -->

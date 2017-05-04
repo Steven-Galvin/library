@@ -57,4 +57,15 @@ class Author
     DB.exec("DELETE FROM authors WHERE id = #{self.id}")
   end
 
+  def self.search_author (search)
+    searched_authors = []
+    authors = DB.exec("SELECT * FROM authors WHERE LOWER(name) LIKE LOWER('#{search}%');")
+    authors.each do |author|
+      name = author.fetch('name')
+      id = author.fetch('id').to_i
+      searched_authors.push(Author.new({:name => name, :id => id}))
+    end
+    searched_authors
+  end
+
 end

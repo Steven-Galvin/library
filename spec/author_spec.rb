@@ -79,6 +79,15 @@ describe(Author) do
     end
   end
 
+  describe('.search_author') do
+    it('returns a list of authors from database') do
+      author1 = Author.new({:name => "John Green", :id => nil})
+      author1.save()
+      author2 = Author.new({:name => "Ernest Hemmingway", :id => nil})
+      author2.save()
+    expect(Author.search_author("Ernest Hemmingway")).to(eq([author2]))
+    end
+  end
 
   describe("#delete") do
     it('lets you delete an author from the database') do

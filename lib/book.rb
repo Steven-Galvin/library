@@ -57,9 +57,9 @@ class Book
     DB.exec("DELETE FROM books WHERE id = #{self.id};")
   end
 
-  def self.search (search)
+  def self.search_book (search)
     searched_books = []
-    books = DB.exec("SELECT * FROM books WHERE title LIKE '#{search}%';")
+    books = DB.exec("SELECT * FROM books WHERE LOWER (title) LIKE LOWER('#{search}%');")
     books.each do |book|
       title = book.fetch('title')
       id = book.fetch('id').to_i

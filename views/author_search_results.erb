@@ -1,0 +1,12 @@
+<h3>Search Results:</h3>
+
+<% if @authors.any? %>
+<ul>
+<% @authors.each() do |author| %>
+<li><a href="/authors/search/<%= author.id %>"><%= author.name %></a></li>
+<% end %>
+<p>Click on an author to see information about it and add authors to it:</p>
+</ul>
+<% else %>
+<p>There are no authors matching your search terms</p>
+<% end %>

@@ -36,12 +36,33 @@ end
 post '/book/search' do
   book = params.fetch('search')
 
-  @books = Book.search(book)
+  @books = Book.search_book(book)
   erb(:book_search_results)
 end
 
-get("/books/:id") do
+get("/books/search/:id") do
   @book = Book.find(params.fetch("id").to_i())
 
   erb(:book_info)
+end
+
+post '/authors' do
+  name = params.fetch('name')
+  author = Author.new({:name => name, :id => nil})
+  author.save
+  @authors = Author.all
+  erb(:authors)
+end
+
+post '/author/search' do
+  author = params.fetch('search')
+
+  @authors = Author.search_author(author)
+  erb(:author_search_results)
+end
+
+get("/authors/search/:id") do
+ @author = Author.find(params.fetch("id").to_i())
+
+  erb(:author_info)
 end

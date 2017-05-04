@@ -90,14 +90,13 @@ describe(Book) do
     end
   end
 
-  describe('.search') do
+  describe('.search_book') do
     it('returns a list of books from database') do
       book1 = Book.new({:title => "Fault in Our Stars", :id => nil})
       book1.save()
       book2 = Book.new({:title => "Moby Dick", :id => nil})
       book2.save()
-    expect(Book.search("Moby Dick")).to(eq([book2]))
-
+    expect(Book.search_book("Moby Dick")).to(eq([book2]))
     end
   end
 end
