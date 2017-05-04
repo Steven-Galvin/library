@@ -48,6 +48,38 @@ describe(Author) do
     end
   end
 
+  describe("#update") do
+    it("lets you update authors in the database") do
+      author = Author.new({:name => "John Green", :id => nil})
+      author.save
+      author.update({:name => "Ernest Hemmingway", :id => nil})
+      expect(author.name).to(eq("Ernest Hemmingway"))
+    end
+
+    it("lets you add a book to an author") do
+      book = Book.new({:title => "Fault in Our Stars", :id => nil})
+      book.save
+      author = Author.new({:name => "John Green", :id => nil})
+      author.save
+      author.update({:book_ids => [book.id]})
+      expect(author.books).to(eq([book]))
+    end
+  end
+
+  describe("#books") do
+    it("returns all of the books written by a particular author") do
+      book1 = Book.new({:title => "Fault in Our Stars", :id => nil})
+      book1.save
+      book2 = Book.new({:title => "Looking for Alaska", :id => nil})
+      book2.save
+      author = Author.new({:name => "John Green", :id => nil})
+      author.save
+      author.update({:book_ids => [book1.id, book2.id]})
+      expect(author.books).to(eq([book1, book2]))
+    end
+  end
+
+
   describe("#delete") do
     it('lets you delete an author from the database') do
       author1 = Author.new({:name => "John Green", :id => nil})
@@ -58,6 +90,4 @@ describe(Author) do
       expect(Author.all()).to(eq([author2]))
     end
   end
-
-  
 end

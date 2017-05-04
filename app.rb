@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require './lib/book'
-require './lib/patron'
+require './lib/author'
 require 'pry'
 require 'pg'
 
