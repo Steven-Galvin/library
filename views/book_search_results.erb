@@ -1,0 +1,12 @@
+<h3>Search Results:</h3>
+
+<% if @books.any? %>
+<ul>
+<% @books.each() do |book| %>
+<li><a href="/books/search/<%= book.id %>"><%= book.title %></a></li>
+<% end %>
+<p>Click on a book to see information about it and add authors to it:</p>
+</ul>
+<% else %>
+<p>There are no books matching your search terms</p>
+<% end %>
