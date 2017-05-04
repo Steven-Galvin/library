@@ -1,1 +1,29 @@
 <h1><%= @author.name %></h1>
+
+<% if @books.any? %>
+  <form action="/authors/<%= @author.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+
+    <% @books.each do |book| %>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="book_ids[]" value="<%= book.id %>"><%= book.title %>
+        </label>
+      </div>
+    <% end %>
+
+    <button type="submit">Add books</button>
+  </form>
+<% end %>
+
+<% if @author.books.any? %>
+  <h3>Here are all the books this author has written:</h3>
+
+  <ul>
+    <% @author.books.each do |book| %>
+      <li><%= book.title %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no books yet!</p>
+<% end %>
